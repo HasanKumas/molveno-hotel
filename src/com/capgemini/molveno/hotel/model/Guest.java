@@ -3,18 +3,53 @@ package com.capgemini.molveno.hotel.model;
 import java.time.LocalDateTime;
 
 public class Guest {
-    String firstName;
-    String lastName;
-    String telephoneNumber;
-    String email;
-    String identityType; //passort, ...
-    String identityValue; //NL68b
-    boolean guestIsInHotel;
+    private String name;
+    private String lastName;
+    private String address;
+    private String tel;
+    private String email;
 
+    public  Guest(String name){
+        this.name=name;
+    }
 
-    //create a method for guest to save to db
-    //create a method to add , delete, edit a guest in  to db
+    public String getName() {
+        return name;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
+    public String getLastName() {
+        return lastName;
+    }
 
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }

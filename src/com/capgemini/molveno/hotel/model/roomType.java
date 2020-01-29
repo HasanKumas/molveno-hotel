@@ -1,5 +1,7 @@
 package com.capgemini.molveno.hotel.model;
 
-public class roomType {
-
+public class RoomType {
+    String discreption;
+    String numberOfBeds;
+    double price;
 }

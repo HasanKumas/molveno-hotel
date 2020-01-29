@@ -17,6 +17,7 @@ public class Application {
     private static Reservation reservation = new Reservation();
     public static Scanner input = new Scanner(System.in);
     private static List<Room> rooms = new ArrayList<>();
+    private static List<Guest> guests = new ArrayList<>();
 
     public static void main(String[] args)  {
         createAllRooms();
@@ -36,7 +37,7 @@ public class Application {
 
             switch (mainOption) {
                 case 1: //create a guest
-                    //put here create guest method
+                    createGuest();
                     System.out.println("press `m` to go to main menu or `enter` to leave the program");
                     if(inputS.nextLine().equals("m"))
                         showMainMenu();
@@ -60,6 +61,32 @@ public class Application {
             }
     }
 
+    private static void createGuest(){
+        System.out.println("MAKE A RESERVATION");
+
+        System.out.println("1. Enter the name of the guest: ");
+        String guestName="guest";
+        guestName = inputS.nextLine();
+        reservation.setGuest(new Guest(guestName));
+
+
+        System.out.println("2. Enter Check in date: ");
+        String checkIDate = inputS.nextLine();
+        DateTimeFormatter formattedCheckIn = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        LocalDateTime checkInDate = LocalDateTime.parse(checkIDate, formattedCheckIn);
+        reservation.setCheckInDate(checkInDate);
+
+        System.out.println("3. Enter Check out date: ");
+        String checkODate = inputS.nextLine();
+        DateTimeFormatter formattedCheckOut = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        LocalDateTime checkOutDate = LocalDateTime.parse(checkODate, formattedCheckOut);
+        reservation.setCheckOutDate(checkOutDate);
+
+
+        System.out.println("4. Enter number of guests: ");
+        int numOfGuests = input.nextInt();
+        reservation.setNumOfGuests(numOfGuests);
+    }
     private static void makeReservation() {
 
             System.out.println("MAKE A RESERVATION");
