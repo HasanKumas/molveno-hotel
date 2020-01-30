@@ -14,6 +14,7 @@ import java.util.*;
 public class Application {
 
     public static Scanner inputS = new Scanner(System.in);
+    public static Scanner inputB = new Scanner(System.in);
     private static Reservation reservation = new Reservation();
     public static Scanner input = new Scanner(System.in);
     private static List<Room> rooms = new ArrayList<>();
@@ -32,6 +33,7 @@ public class Application {
             System.out.println("2. Make a reservation for a room");
             System.out.println("3. Make a payment");
             System.out.println("4. Show guest list");
+            System.out.println("5. Create a room");
 
             System.out.println("Choose your option number and press enter");
             int mainOption = input.nextInt();
@@ -53,6 +55,10 @@ public class Application {
                     showGuestList();
                     showMenu();
                     break;
+                case 5://create room
+                    createRoom();
+                    showMenu();
+                    break;
                 default:
                     showMenu();
 
@@ -68,6 +74,39 @@ public class Application {
     private static void makePayment(){
         System.out.println("under construction...");
     }
+    private static void createRoom() {
+        Room room=new Room();
+        System.out.println("CREATE A ROOM");
+
+        System.out.println("1. Enter the room number: ");
+        int roomNumber= inputS.nextInt();
+        room.setRoomNumber(roomNumber);
+
+        System.out.println("2. Enter the room type: ");
+        String roomType= inputS.nextLine();
+        room.setRoomType(roomType);
+
+        System.out.println("3. Enter the room availability: ");
+        boolean roomAvailable= inputB.nextBoolean();
+        room.setAvailable(roomAvailable);
+
+        System.out.println("4. Enter the room max beds: ");
+        int bedNumber= inputS.nextInt();
+        room.setRoomNumber(bedNumber);
+
+        System.out.println("5. Enter the room price: ");
+        int roommPrice= inputS.nextInt();
+        room.setRoomNumber(roommPrice);
+
+        rooms.add(room);
+
+//        System.out.println(rooms.get(0));
+//        System.out.println(rooms.get(0));
+//        System.out.println(rooms.get(0));
+//        System.out.println(rooms.get(0));
+//        System.out.println(rooms.get(0));
+    }
+
     private static void createGuest(){
         Guest guest=new Guest();
 
