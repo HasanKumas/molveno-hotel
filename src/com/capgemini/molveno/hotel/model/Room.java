@@ -75,5 +75,6 @@ public class Room {
     }
 
 
-
+    public class room_Type {
+    }
 }

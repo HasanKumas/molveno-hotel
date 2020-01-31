@@ -1,6 +1,7 @@
 package com.capgemini.molveno.hotel;
 
 import com.capgemini.molveno.hotel.model.Guest;
+import com.capgemini.molveno.hotel.model.Payment_Detail;
 import com.capgemini.molveno.hotel.model.Reservation;
 import com.capgemini.molveno.hotel.model.Room;
 
@@ -18,6 +19,8 @@ public class Application {
     public static Scanner input = new Scanner(System.in);
     private static List<Room> rooms = new ArrayList<>();
     private static List<Guest> guests = new ArrayList<>();
+    public static Scanner reader = new Scanner(System.in);
+    private static Payment_Detail payment = new Payment_Detail();
 
     public static void main(String[] args)  {
         createAllRooms();
@@ -50,6 +53,18 @@ public class Application {
                     break;
                 case 3://make a payment
                     //put here payment method
+                    Payment_Detail payment =new Payment_Detail();
+                    System.out.println("enter card name: ");
+                    Scanner scanner=new Scanner(System.in);
+                    payment.setCardName(scanner.nextLine());
+                    System.out.println("enter card  No: ");
+                    payment.setCardNo(scanner.nextLine());
+                    System.out.println("enter Bill Adress: ");
+                    payment.setBillAddress(scanner.nextLine());
+                    payment.setPayType(Payment_Detail.Payment_Type.Credit_card);
+                    payment.setPayType(Payment_Detail.Payment_Type.Debit_card);
+                    payment.setPayType(Payment_Detail.Payment_Type.Cash);
+                    System.out.println(payment.getBillAddress());
                     System.out.println("press `m` to go to main menu or `enter` to leave the program");
                     if(inputS.nextLine().equals("m"))
                         showMainMenu();

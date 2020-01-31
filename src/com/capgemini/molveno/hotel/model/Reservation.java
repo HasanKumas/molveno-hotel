@@ -26,7 +26,7 @@ public class Reservation {
     }
 
     public void setRoomsReserved(Room roomsReserved) {
-        this.roomsReserved= roomsReserved;
+        this.roomsReserved = roomsReserved;
     }
 
     public List<Payment> getPayments() {
@@ -34,6 +34,7 @@ public class Reservation {
     }
 
     public void setPayments(List<Payment> payments) {
+
         this.payments = payments;
     }
 
