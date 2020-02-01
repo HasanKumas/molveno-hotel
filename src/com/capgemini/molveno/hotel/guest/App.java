@@ -14,6 +14,7 @@ public class App {
            guest.getName();
            guest.getLastName();
            guest.getTel();
+
            guest.getAddress();
            guest.getEmail();
            guest.getIdType();

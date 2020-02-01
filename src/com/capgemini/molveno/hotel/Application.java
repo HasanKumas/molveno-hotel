@@ -21,19 +21,34 @@ public class Application {
     private static List<Guest> guests = new ArrayList<>();
 
     public static void main(String[] args)  {
-        createAllRooms();
+//        createAllRooms();
 
         showMainMenu();
     }
 
 
     private  static  void showMainMenu() {
+            System.out.println("                   __          __    _                                 _______                              \n" +
+                    "                   \\ \\        / /   | |                               |__   __|                             \n" +
+                    "                    \\ \\  /\\  / /___ | |  ___  ___   _ __ ___    ___      | |  ___                           \n" +
+                    "                     \\ \\/  \\/ // _ \\| | / __|/ _ \\ | '_ ` _ \\  / _ \\     | | / _ \\                          \n" +
+                    "                      \\  /\\  /|  __/| || (__| (_) || | | | | ||  __/     | || (_) |                         \n" +
+                    "                       \\/  \\/  \\___||_| \\___|\\___/ |_| |_| |_| \\___|     |_| \\___/                          \n" +
+                    "  _    _         _         _    __  __         _                             _____                          \n" +
+                    " | |  | |       | |       | |  |  \\/  |       | |                           |  __ \\                         \n" +
+                    " | |__| |  ___  | |_  ___ | |  | \\  / |  ___  | |__   __ ___  _ __    ___   | |  | |  ___  _ __ ___    ___  \n" +
+                    " |  __  | / _ \\ | __|/ _ \\| |  | |\\/| | / _ \\ | |\\ \\ / // _ \\| '_ \\  / _ \\  | |  | | / _ \\| '_ ` _ \\  / _ \\ \n" +
+                    " | |  | || (_) || |_|  __/| |  | |  | || (_) || | \\ V /|  __/| | | || (_) | | |__| ||  __/| | | | | || (_) |\n" +
+                    " |_|  |_| \\___/  \\__|\\___||_|  |_|  |_| \\___/ |_|  \\_/  \\___||_| |_| \\___/  |_____/  \\___||_| |_| |_| \\___/ \n" +
+                    "                                                                                                            \n" +
+                    "                                                                                                            ");
             System.out.println("MAIN MENU FOR RESERVATION-HOTEL MOLVENO");
             System.out.println("1. Create a guest");
             System.out.println("2. Make a reservation for a room");
             System.out.println("3. Make a payment");
             System.out.println("4. Show guest list");
             System.out.println("5. Create a room");
+            System.out.println("6. Show room list");
 
             System.out.println("Choose your option number and press enter");
             int mainOption = input.nextInt();
@@ -59,6 +74,10 @@ public class Application {
                     createRoom();
                     showMenu();
                     break;
+                case 6://create room
+                    showRoom();
+                    showMenu();
+                    break;
                 default:
                     showMenu();
 
@@ -79,7 +98,7 @@ public class Application {
         System.out.println("CREATE A ROOM");
 
         System.out.println("1. Enter the room number: ");
-        int roomNumber= inputS.nextInt();
+        int roomNumber= input.nextInt();
         room.setRoomNumber(roomNumber);
 
         System.out.println("2. Enter the room type: ");
@@ -91,20 +110,30 @@ public class Application {
         room.setAvailable(roomAvailable);
 
         System.out.println("4. Enter the room max beds: ");
-        int bedNumber= inputS.nextInt();
-        room.setRoomNumber(bedNumber);
+        int bedNumber= input.nextInt();
+        room.setMaxBeds(bedNumber);
+
 
         System.out.println("5. Enter the room price: ");
-        int roommPrice= inputS.nextInt();
-        room.setRoomNumber(roommPrice);
+        int roomPrice= input.nextInt();
+        room.setRoomPrice(roomPrice);
 
         rooms.add(room);
 
-//        System.out.println(rooms.get(0));
-//        System.out.println(rooms.get(0));
-//        System.out.println(rooms.get(0));
-//        System.out.println(rooms.get(0));
-//        System.out.println(rooms.get(0));
+        System.out.println("Room number: "+ room.getRoomNumber());
+        System.out.println("Room type: "+ room.getRoomType());
+        System.out.println("Room availability: " + room.getAvailable());
+        System.out.println("Number of beds: "+ room.getMaxBeds());
+        System.out.println("Room price: "+  room.getRoomPrice());
+    }
+    private  static void showRoom(){
+        for (Room r: rooms) {
+            System.out.println("Room number: "+ r.getRoomNumber());
+            System.out.println("Room type: "+ r.getRoomType());
+            System.out.println("Room availability: " + r.getAvailable());
+            System.out.println("Number of beds: "+ r.getMaxBeds());
+            System.out.println("Room price: "+ r.getRoomPrice());
+        }
     }
 
     private static void createGuest(){
