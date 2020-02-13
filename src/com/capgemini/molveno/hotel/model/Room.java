@@ -4,18 +4,36 @@ import java.time.LocalDateTime;
 
 public class Room {
     final int MAX_NUM_OF_ROOMS = 200;
-    private String roomType;
+    private String roomSizeType;
+    private String roomBudgetType;
+    private String roomSceneType;
     private  int roomNumber, maxBeds;
     private LocalDateTime checkInTime, checkOutTime;
     private boolean reserved, available;
-    private double roomPrice;
+    private int roomPrice;
 
-    public String getRoomType() {
-        return roomType;
+    public String getRoomSizeType() {
+        return roomSizeType;
     }
 
-    public void setRoomType(String roomType) {
-        this.roomType = roomType;
+    public void setRoomSizeType(String roomSizeType) {
+        this.roomSizeType = roomSizeType;
+    }
+
+    public String getRoomBudgetType() {
+        return roomBudgetType;
+    }
+
+    public void setRoomBudgetType(String roomBudgetType) {
+        this.roomBudgetType = roomBudgetType;
+    }
+
+    public String getRoomSceneType() {
+        return roomSceneType;
+    }
+
+    public void setRoomSceneType(String roomSceneType) {
+        this.roomSceneType = roomSceneType;
     }
 
     public int getRoomNumber() {
@@ -66,13 +84,14 @@ public class Room {
         this.available = available;
     }
 
-    public double getRoomPrice() {
+    public int getRoomPrice() {
         return roomPrice;
     }
 
-    public void setRoomPrice(double roomPrice) {
+    public void setRoomPrice(int roomPrice) {
         this.roomPrice = roomPrice;
     }
+
 
 
 
