@@ -1,32 +1,87 @@
 package com.capgemini.molveno.hotel.model;
 
-public class Payment {
+import java.io.Serializable;
 
-    public static void main(String[] args) {
-        Payment d=new Payment();
-        System.out.println(d.Payment(2));
+public class Payment implements Serializable{
+
+
+    public enum Payment_Type{
+        Credit_card, Debit_card, Cash;
     }
-    public int Payment(int person){
-        int result=0;
-        switch (person){
-            case 1:
-                result = 10;
-                break;
-            case 2:
-                result = 20;
-                break;
-            case 3:
-                result = 30;
-                break;
-            case 4:
-                result=30;
-                break;
-            default:
-                result = -1;
-                break;
 
-        }
-        return result;
+    //Payment
+    private Payment_Type pay_Type;
+    private String card_Name;
+    private String card_No;
+    private String bill_address;
+    private String card_expiry_Date;
+
+    //Constructor
+    public Payment(Payment_Type pay_Type, String card_Name, String card_No, String bill_address, String card_expiry_Date)
+    {
+        this.pay_Type = pay_Type;
+        this.card_Name = card_Name;
+        this.card_No = card_No;
+        this.bill_address = bill_address;
+        this.card_expiry_Date = card_expiry_Date;
+    }
+
+    public Payment()
+    {
+
+    }
+
+    //Getter
+    public Payment_Type getPayType()
+    {
+        return this.pay_Type;
+    }
+
+    public String getCardName()
+    {
+        return this.card_Name;
+    }
+
+    public String getCardNo()
+    {
+        return this.card_No;
+    }
+
+    public String getBillAddress()
+    {
+        return this.bill_address;
+    }
+
+    public String getCardExpiry()
+    {
+        return this.card_expiry_Date;
+    }
+
+
+    //Setter
+    public void setPayType(Payment_Type pay_Type)
+    {
+        this.pay_Type = pay_Type;
+    }
+
+    public void setCardName(String card_Name)
+    {
+        this.card_Name = card_Name;
+    }
+
+    public void setCardNo(String card_No)
+    {
+        this.card_No = card_No;
+    }
+
+    public void setBillAddress(String bill_address)
+    {
+        this.bill_address = bill_address;
+    }
+
+    public void setCardExipry(String card_expiry_Date)
+    {
+        this.card_expiry_Date = card_expiry_Date;
     }
 
 }

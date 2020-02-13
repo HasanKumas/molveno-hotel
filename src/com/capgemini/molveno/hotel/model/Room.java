@@ -10,7 +10,7 @@ public class Room {
     private  int roomNumber, maxBeds;
     private LocalDateTime checkInTime, checkOutTime;
     private boolean reserved, available;
-    private double roomPrice;
+    private int roomPrice;
 
     public String getRoomSizeType() {
         return roomSizeType;
@@ -84,11 +84,11 @@ public class Room {
         this.available = available;
     }
 
-    public double getRoomPrice() {
+    public int getRoomPrice() {
         return roomPrice;
     }
 
-    public void setRoomPrice(double roomPrice) {
+    public void setRoomPrice(int roomPrice) {
         this.roomPrice = roomPrice;
     }
 

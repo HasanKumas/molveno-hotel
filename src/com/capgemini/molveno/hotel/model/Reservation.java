@@ -1,17 +1,31 @@
 package com.capgemini.molveno.hotel.model;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 public class Reservation {
+    private static int currentReservationNumber = 1;
+
     private Guest guest;
     private Room roomsReserved;
     private List<Payment> payments;
     private LocalDateTime checkInDate;
     private LocalDateTime checkOutDate;
     private int numOfGuests;
+    private int reservationNumber;
+
+    public Reservation() {
+        this.reservationNumber = currentReservationNumber;
+        currentReservationNumber++;
+    }
+
+    public int getReservationNumber() {
+        return reservationNumber;
+    }
 
     public Guest getGuest() {
         return guest;
@@ -59,5 +73,12 @@ public class Reservation {
 
     public void setNumOfGuests(int numOfGuests) {
         this.numOfGuests = numOfGuests;
+    }
+
+    public int totalPrice() {
+        LocalDate checkIn = checkInDate.toLocalDate();
+        LocalDate checkOut = checkOutDate.toLocalDate();
+        long days = ChronoUnit.DAYS.between(checkIn, checkOut);
+        return (int)days*getRoomsReserved().getRoomPrice();
     }
 }

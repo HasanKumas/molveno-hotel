@@ -1,12 +1,10 @@
 package com.capgemini.molveno.hotel;
 
 import com.capgemini.molveno.hotel.model.Guest;
+import com.capgemini.molveno.hotel.model.Payment;
 import com.capgemini.molveno.hotel.model.Reservation;
 import com.capgemini.molveno.hotel.model.Room;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -21,6 +19,7 @@ public class Application {
     private static List<Room> rooms = new ArrayList<>();
     private static List<Guest> guests = new ArrayList<>();
     private static List<Reservation> reservations = new ArrayList<>();
+    private static List<Payment> payments = new ArrayList<>();
 
     public static void main(String[] args) {
         createAllRooms();
@@ -52,6 +51,7 @@ public class Application {
         System.out.println("5. Create a room");
         System.out.println("6. Show room list");
         System.out.println("7. Show reservations list");
+        System.out.println("8. Show payment");
 
         System.out.println("Choose your option number and press enter");
         String mainOption = input.next();
@@ -85,6 +85,10 @@ public class Application {
                 showReservationsList();
                 showMenu();
                 break;
+            case "8"://show a payment
+                showPayments();
+                showMenu();
+                break;
             default:
                 System.out.println("you did not select right number. Please select right number");
                 showMenu();
@@ -99,63 +103,90 @@ public class Application {
         }
     }
 
-    private static void makePayment() {
-        System.out.println("under construction...");
+    private static void makePayment(){
+        Payment payment=new Payment();
+        System.out.println("1.Card name:");
+        payment.setCardName(inputS.nextLine());
+
+        System.out.println("2.Card No:");
+        payment.setCardNo(inputS.nextLine());
+
+        System.out.println("3.Bill Adress:");
+        payment.setBillAddress(inputS.nextLine());
+
+       // System.out.println("4.Payment:");
+       // payment.setCardExipry(inputS.nextLine());
+
+        System.out.println("5.Reservation Number:");
+        int resNumber= input.nextInt();
+
+        payments.add(payment);
+        System.out.println("The total price is: "+ reservations.get(resNumber-1).totalPrice());
+
+    }
+    private static void showPayments() {
+        for (int i=0;i<payments.size(); i++){
+            System.out.println("The Card name:"+payments.get(i).getCardName());
+            System.out.println("The Card No:"+payments.get(i).getCardNo());
+            System.out.println("The bill Adress:"+payments.get(i).getBillAddress());
+            //System.out.println("Payment:"+payments.get(i).getCardExpiry());
+        }
     }
 
+
     private static void createRoom() {
-        Room room=new Room();
+        Room room = new Room();
         System.out.println("CREATE A ROOM");
 
         System.out.println("1. Enter the room number: ");
-        int roomNumber= input.nextInt();
+        int roomNumber = input.nextInt();
         room.setRoomNumber(roomNumber);
 
         System.out.println("2. Enter the room size type(single, double, family, bride suite): ");
-        String roomType= inputS.nextLine();
+        String roomType = inputS.nextLine();
         room.setRoomSizeType(roomType);
 
         System.out.println("3. Enter the room budget type(budget, standard, luxury): ");
-        String roomBudgetType= inputS.nextLine();
+        String roomBudgetType = inputS.nextLine();
         room.setRoomBudgetType(roomBudgetType);
 
         System.out.println("4. Enter the room scene type(lake side, mountain side): ");
-        String roomSceneType= inputS.nextLine();
+        String roomSceneType = inputS.nextLine();
         room.setRoomSceneType(roomSceneType);
 
         System.out.println("5. Enter the room availability(true or false): ");
-        boolean roomAvailable= inputB.nextBoolean();
+        boolean roomAvailable = inputB.nextBoolean();
         room.setAvailable(roomAvailable);
 
         System.out.println("6. Enter the room max beds: ");
-        int bedNumber= input.nextInt();
+        int bedNumber = input.nextInt();
         room.setMaxBeds(bedNumber);
 
 
         System.out.println("7. Enter the room price: ");
-        int roomPrice= input.nextInt();
+        int roomPrice = input.nextInt();
         room.setRoomPrice(roomPrice);
 
         rooms.add(room);
 
-        System.out.println("Room number: "+ room.getRoomNumber());
-        System.out.println("Room size type: "+ room.getRoomSizeType());
-        System.out.println("Room budget type: "+ room.getRoomBudgetType());
-        System.out.println("Room scene type: "+ room.getRoomSceneType());
+        System.out.println("Room number: " + room.getRoomNumber());
+        System.out.println("Room size type: " + room.getRoomSizeType());
+        System.out.println("Room budget type: " + room.getRoomBudgetType());
+        System.out.println("Room scene type: " + room.getRoomSceneType());
         System.out.println("Room availability: " + room.getAvailable());
-        System.out.println("Number of beds: "+ room.getMaxBeds());
-        System.out.println("Room price: "+  room.getRoomPrice());
+        System.out.println("Number of beds: " + room.getMaxBeds());
+        System.out.println("Room price: " + room.getRoomPrice());
     }
 
     private static void showRoom() {
-        for (Room r: rooms) {
-            System.out.println("Room number: "+ r.getRoomNumber());
-            System.out.println("Room size type: "+ r.getRoomSizeType());
-            System.out.println("Room budget type: "+ r.getRoomBudgetType());
-            System.out.println("Room scene type: "+ r.getRoomSceneType());
+        for (Room r : rooms) {
+            System.out.println("Room number: " + r.getRoomNumber());
+            System.out.println("Room size type: " + r.getRoomSizeType());
+            System.out.println("Room budget type: " + r.getRoomBudgetType());
+            System.out.println("Room scene type: " + r.getRoomSceneType());
             System.out.println("Room availability: " + r.getAvailable());
-            System.out.println("Number of beds: "+ r.getMaxBeds());
-            System.out.println("Room price: "+ r.getRoomPrice());
+            System.out.println("Number of beds: " + r.getMaxBeds());
+            System.out.println("Room price: " + r.getRoomPrice());
         }
     }
 
@@ -221,12 +252,13 @@ public class Application {
 
     private static void showReservationsList() {
         for (Reservation reservation : reservations) {
-            System.out.println(reservation.getGuest().getLastName());
-            System.out.println(reservation.getGuest().getName());
-            System.out.println(reservation.getCheckInDate());
-            System.out.println(reservation.getCheckOutDate());
-            System.out.println(reservation.getNumOfGuests());
-            System.out.println(reservation.getRoomsReserved().getRoomNumber());
+            System.out.println("LIST OF RESERVATIONS ");
+            System.out.println("The last name is: "+ reservation.getGuest().getLastName());
+            System.out.println("The name is: "+reservation.getGuest().getName());
+            System.out.println("The check in date is: "+reservation.getCheckInDate());
+            System.out.println("The check out date is: "+reservation.getCheckOutDate());
+            System.out.println("The number of guest is/are: "+reservation.getNumOfGuests());
+            System.out.println("The reserved room number is: "+reservation.getRoomsReserved().getRoomNumber());
 
 
         }
@@ -235,16 +267,6 @@ public class Application {
     private static void makeReservation() {
         Reservation reservation = new Reservation();
         System.out.println("MAKE A RESERVATION");
-//        Guest guest = new Guest();
-//        System.out.println("1. Enter the name of the guest: ");
-//        String guestName = inputS.nextLine();
-//        guest.setName(guestName);
-//
-//        System.out.println("2. Enter the last name of the guest: ");
-//        String guestLastName = inputS.nextLine();
-//        guest.setLastName(guestLastName);
-
-        //reservation.setGuest(guest);
 
         boolean success = false;
 
@@ -261,7 +283,7 @@ public class Application {
             }
         } while (!success);
 
-        success=false;
+        success = false;
 
         do {
 
@@ -276,12 +298,12 @@ public class Application {
                 System.out.println("Try again");
             }
         }
-            while (!success) ;
+        while (!success);
 
 
-            System.out.println("3. Enter number of guests: ");
-            int numOfGuests = input.nextInt();
-            reservation.setNumOfGuests(numOfGuests);
+        System.out.println("3. Enter number of guests: ");
+        int numOfGuests = input.nextInt();
+        reservation.setNumOfGuests(numOfGuests);
 
 
         System.out.println("4. Enter the room type (single, double, family, bride suite): ");
@@ -295,10 +317,11 @@ public class Application {
 
 //decide available room
         for (Room room : rooms) {
-            if (room.getRoomSizeType().equals(roomSizeType)  && (room.getRoomBudgetType().equals(roomBudgetType)  || room.getRoomSceneType().equals(roomSceneType))  && (room.getMaxBeds()== numOfGuests) && room.getAvailable()) {
+            if (room.getRoomSizeType().equals(roomSizeType) && room.getRoomBudgetType().equals(roomBudgetType) && room.getRoomSceneType().equals(roomSceneType) && (room.getMaxBeds() == numOfGuests) && room.getAvailable()) {
                 room.setAvailable(false);
                 reservation.setRoomsReserved(room);
-                reservations.add(reservation);
+                //reservation.setReservationNumber(i);
+                //
                 break;
             }
 
@@ -307,51 +330,58 @@ public class Application {
             System.out.println("There is no available room for your choice..");
         } else {
             int reservedRoomNumber = reservation.getRoomsReserved().getRoomNumber();
-            System.out.println("The room " + reservedRoomNumber + " is available for reservation " );
-            System.out.println("Check In Date: "+ reservation.getCheckInDate());
-            System.out.println("Check Out Date: "+reservation.getCheckOutDate());
-            System.out.println("Number of Guests: "+ reservation.getNumOfGuests());
+            System.out.println("The room " + reservedRoomNumber + " is available for reservation ");
+            System.out.println("Check In Date: " + reservation.getCheckInDate());
+            System.out.println("Check Out Date: " + reservation.getCheckOutDate());
+            System.out.println("Number of Guests: " + reservation.getNumOfGuests());
+
+
+            System.out.println("Guest information");
+            Guest guest = new Guest();
+            System.out.println("1. Enter the Last name of the guest: ");
+            String guestLastName = inputS.nextLine();
+            guest.setLastName(guestLastName);
+            System.out.println("2. Enter the first name of the guest: ");
+
+            String guestName = inputS.nextLine();
+            guest.setName(guestName);
+
+            reservation.setGuest(guest);
+            //reservation.setReservationNumber(i);
+            reservations.add(reservation);
+            System.out.println("The room " + reservedRoomNumber + " is reserved for " +guest.getLastName() + " " +guest.getName());
+        }
+    }
+
+//    private static int calculatePrice(int i){
+//        return reservations.get(i).getRoomsReserved().getRoomPrice()*reservations.;
+//    }
+    private static void createAllRooms() {
+        int maxRooms = 130;
+        for (int i = 0; i < maxRooms; i++) {
+            rooms.add(new Room());
+        }
+        //single rooms
+        for (int i = 0; i < 50; i++) {
+            rooms.get(i).setRoomNumber(i + 1);
+            rooms.get(i).setRoomSizeType("single");
+            rooms.get(i).setRoomBudgetType("budget");
+            rooms.get(i).setRoomSceneType("lake side");
+            rooms.get(i).setAvailable(true);
+            rooms.get(i).setMaxBeds(1);
+            rooms.get(i).setRoomPrice(50);
         }
 
-        System.out.println("Guest information");
-        Guest guest = new Guest();
-        System.out.println("1. Enter the Last name of the guest: ");
-      String guestLastName = inputS.nextLine();
-       guest.setLastName(guestLastName);
-        System.out.println("2. Enter the first name of the guest: ");
-       String guestName = inputS.nextLine();
-        guest.setName(guestName);
-
-        reservation.setGuest(guest);
-
+        //double rooms
+        for (int i = 50; i < 130; i++) {
+            rooms.get(i).setRoomNumber(i + 1);
+            rooms.get(i).setRoomSizeType("double");
+            rooms.get(i).setRoomBudgetType("budget");
+            rooms.get(i).setRoomSceneType("mountain side");
+            rooms.get(i).setAvailable(true);
+            rooms.get(i).setMaxBeds(2);
+            rooms.get(i).setRoomPrice(80);
         }
-
-        private static void createAllRooms () {
-            int maxRooms = 285;
-            for (int i = 0; i < maxRooms; i++) {
-                rooms.add(new Room());
-            }
-            //single rooms
-            for (int i = 0; i < 50; i++) {
-                rooms.get(i).setRoomNumber(i + 1);
-                rooms.get(i).setRoomSizeType("single");
-                rooms.get(i).setRoomBudgetType("budget");
-                rooms.get(i).setRoomSceneType("lake side");
-                rooms.get(i).setAvailable(true);
-                rooms.get(i).setMaxBeds(1);
-                rooms.get(i).setRoomPrice(50);
-            }
-
-            //double rooms
-            for (int i = 50; i < 130; i++) {
-                rooms.get(i).setRoomNumber(i + 1);
-                rooms.get(i).setRoomSizeType("double");
-                rooms.get(i).setRoomBudgetType("budget");
-                rooms.get(i).setRoomSceneType("mountain side");
-                rooms.get(i).setAvailable(true);
-                rooms.get(i).setMaxBeds(2);
-                rooms.get(i).setRoomPrice(80);
-            }
 //            //family rooms
 //            for (int i = 130; i < 170; i++) {
 //                rooms.get(i).setRoomNumber(i + 1);
@@ -419,4 +449,5 @@ public class Application {
 //            System.out.println("285 rooms created..");
 //        }
 
-    }}
+    }
+}
