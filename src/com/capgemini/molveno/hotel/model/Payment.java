@@ -10,7 +10,7 @@ public class Payment implements Serializable{
     }
 
     //Payment
-    private Payment_Type pay_Type;
+    private int totalPayment;
     private String card_Name;
     private String card_No;
     private String bill_address;
@@ -19,7 +19,6 @@ public class Payment implements Serializable{
     //Constructor
     public Payment(Payment_Type pay_Type, String card_Name, String card_No, String bill_address, String card_expiry_Date)
     {
-        this.pay_Type = pay_Type;
         this.card_Name = card_Name;
         this.card_No = card_No;
         this.bill_address = bill_address;
@@ -30,11 +29,9 @@ public class Payment implements Serializable{
     {
 
     }
-
     //Getter
-    public Payment_Type getPayType()
-    {
-        return this.pay_Type;
+    public int getTotalPayment() {
+        return totalPayment;
     }
 
     public String getCardName()
@@ -57,11 +54,9 @@ public class Payment implements Serializable{
         return this.card_expiry_Date;
     }
 
-
     //Setter
-    public void setPayType(Payment_Type pay_Type)
-    {
-        this.pay_Type = pay_Type;
+    public void setTotalPayment(int totalPayment) {
+        this.totalPayment = totalPayment;
     }
 
     public void setCardName(String card_Name)
